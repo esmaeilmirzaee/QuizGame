@@ -39,6 +39,15 @@ class MenuViewController: UIViewController {
         "Emoji Riddle"
     ]
     
+    private var recentScores = [Int]()
+    private var highScores = [Int]()
+    private var scoreIndex = 0
+    private var timer = Timer()
+    
+    private var midXConstraints: [NSLayoutConstraint]!
+    private var leftConstraints: [NSLayoutConstraint]!
+    private var rightConstraints: [NSLayoutConstraint]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = true
@@ -49,6 +58,23 @@ class MenuViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        updateScores()
+    }
+    
+    func updateScores() {
+        recentScores = [
+            UserDefaults.standard.integer(forKey: multipleChoiceRecentScoreIdentifier),
+            UserDefaults.standard.integer(forKey: imageQuizRecentScoreIdentifier),
+            UserDefaults.standard.integer(forKey: rightWrongRecentScoreIdentifier),
+            UserDefaults.standard.integer(forKey: emojiRiddleRecentScoreIdentifier)
+        ]
+        
+        highScores = [
+            UserDefaults.standard.integer(forKey: multipleChoiceHighScoreIdentifier),
+            UserDefaults.standard.integer(forKey: imageQuizHighScoreIdentifier),
+            UserDefaults.standard.integer(forKey: rightWrongHighScoreIdentifier),
+            UserDefaults.standard.integer(forKey: emojiRiddleHighScoreIdentifier)
+        ]
     }
     
     func layoutView() {
@@ -57,6 +83,7 @@ class MenuViewController: UIViewController {
         
         logoView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(logoView)
+        logoView.image = UIImage(named: "logo")
         
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(buttonView)
@@ -69,6 +96,7 @@ class MenuViewController: UIViewController {
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
             button.setTitle(title, for: .normal)
             button.tag = index
+            button.addTarget(self, action: #selector(buttonHandler), for: .touchUpInside)
             gameButtons.append(button)
         }
         
@@ -90,9 +118,9 @@ class MenuViewController: UIViewController {
         highScoreLabel.font = UIFont.boldSystemFont(ofSize: 20)
         highScoreLabel.textColor = .white
         
-        titleLabel.text = "Multiple Choice"
-        recentScoreLabel.text = "Recent: \(0)"
-        highScoreLabel.text = "High Score: \(0)"
+        titleLabel.text = titles[scoreIndex]
+        recentScoreLabel.text = "Recent: \(String(UserDefaults.standard.integer(forKey: multipleChoiceRecentScoreIdentifier)))"
+        highScoreLabel.text = "High Score: \(String(UserDefaults.standard.integer(forKey: multipleChoiceHighScoreIdentifier)))"
         
         let constraints = [
             contentView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: 8),
@@ -126,7 +154,6 @@ class MenuViewController: UIViewController {
             scoreView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: paddingMinusForty),
             scoreView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: paddingSixTenth),
             scoreView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: paddingThreeTenth),
-            scoreView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: scoreView.topAnchor, constant: paddingEight),
             titleLabel.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: scoreView.trailingAnchor),
@@ -141,16 +168,56 @@ class MenuViewController: UIViewController {
             recentScoreLabel.heightAnchor.constraint(equalTo: highScoreLabel.heightAnchor)
         ]
         
+        midXConstraints = [scoreView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)]
+        leftConstraints = [scoreView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor)]
+        rightConstraints = [scoreView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor)]
+        
         NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activate(midXConstraints)
         
-        
-        
-        
-        
-        
+        timer = Timer.scheduledTimer(timeInterval: 3.9, target: self, selector: #selector(nextScores), userInfo: nil, repeats: true)
     }
     
+    @objc func buttonHandler(sender: RoundedButton) {
+        var vc: UIViewController?
+        switch sender.tag {
+        case 0:
+            print("Multiple")
+        case 1:
+            print("Image")
+        case 2:
+            print("Right Wrong")
+        case 3:
+            print("Emoji")
+        default:
+            break
+        }
+        
+        if let newVC = vc {
+            navigationController?.pushViewController(newVC, animated: true)
+        }
+    }
     
+    @objc func nextScores() {
+        scoreIndex = scoreIndex < (recentScores.count - 1) ? scoreIndex + 1 : 0
+        UIView.animate(withDuration: 2.0, animations: {
+            NSLayoutConstraint.deactivate(self.midXConstraints)
+            NSLayoutConstraint.activate(self.leftConstraints)
+            self.view.layoutIfNeeded()
+        }) { (compilation: Bool) in
+            self.titleLabel.text = self.titles[self.scoreIndex]
+            self.recentScoreLabel.text = "Recent: \(String(self.recentScores[self.scoreIndex]))"
+            self.highScoreLabel.text = "Highscore: \(String(self.highScores[self.scoreIndex]))"
+            NSLayoutConstraint.deactivate(self.leftConstraints)
+            NSLayoutConstraint.activate(self.rightConstraints)
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 1.0) {
+                NSLayoutConstraint.deactivate(self.rightConstraints)
+                NSLayoutConstraint.activate(self.midXConstraints)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     
     
     
