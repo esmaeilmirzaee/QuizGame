@@ -26,6 +26,7 @@
 		DACB41B224582DDB00096E9E /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B124582DDB00096E9E /* Paddings.swift */; };
 		DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */ = {isa = PBXBuildFile; fileRef = DACB41B324583CD200096E9E /* MultipleChoice.plist */; };
 		DACB41B6245843BF00096E9E /* QuizLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B5245843BF00096E9E /* QuizLoader.swift */; };
+		DACB41B824586B6F00096E9E /* QuizAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B724586B6F00096E9E /* QuizAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		DACB41B124582DDB00096E9E /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
 		DACB41B324583CD200096E9E /* MultipleChoice.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultipleChoice.plist; sourceTree = "<group>"; };
 		DACB41B5245843BF00096E9E /* QuizLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLoader.swift; sourceTree = "<group>"; };
+		DACB41B724586B6F00096E9E /* QuizAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAlertView.swift; sourceTree = "<group>"; };
 		DBCD8952D5059D3DACF719B2 /* Pods_Quiz_Game_Quiz_GameUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_Game_Quiz_GameUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E36CD5E6BB2711FC103554E2 /* Pods-Quiz Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz Game.release.xcconfig"; path = "Target Support Files/Pods-Quiz Game/Pods-Quiz Game.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +230,7 @@
 				DA510BBC2457661C006F47C1 /* Constants+Extensions.swift */,
 				DACB41B124582DDB00096E9E /* Paddings.swift */,
 				DACB41B5245843BF00096E9E /* QuizLoader.swift */,
+				DACB41B724586B6F00096E9E /* QuizAlertView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				DA3BB86F245730D70080C983 /* RoundedLabel.swift in Sources */,
 				DA510BC224577B49006F47C1 /* MultipleChoiceViewController.swift in Sources */,
 				DACB41B224582DDB00096E9E /* Paddings.swift in Sources */,
+				DACB41B824586B6F00096E9E /* QuizAlertView.swift in Sources */,
 				DA7D2A2B24572E7B006646DF /* AppDelegate.swift in Sources */,
 				DA7D2A2D24572E7B006646DF /* SceneDelegate.swift in Sources */,
 				DA7D2A6124572FE2006646DF /* RoundedButton.swift in Sources */,
