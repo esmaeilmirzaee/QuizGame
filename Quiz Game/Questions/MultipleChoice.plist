@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Questions</key>
+	<array>
+		<dict>
+			<key>Question</key>
+			<string>What is the name of Queen Elizabeth IIs oldest son?</string>
+			<key>CorrectAnswer</key>
+			<string>Prince Charles</string>
+			<key>Answers</key>
+			<array>
+				<string>Prince Maurice</string>
+				<string>Prince Harry</string>
+				<string>Prince Charles</string>
+				<string>Willy</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Who is a famous fictional wizard?</string>
+			<key>CorrectAnswer</key>
+			<string>Harry Potter</string>
+			<key>Answers</key>
+			<array>
+				<string>Harry Potter</string>
+				<string>Sherlock Holmes</string>
+				<string>Iron Man</string>
+				<string>Hawkeye</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Which one of these superheroes is not part of The Avengers?</string>
+			<key>CorrectAnswer</key>
+			<string>Superman</string>
+			<key>Answers</key>
+			<array>
+				<string>Hulk</string>
+				<string>Thor</string>
+				<string>Black Widow</string>
+				<string>Superman</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>What is Arnold Schwarzeneggers home country?</string>
+			<key>CorrectAnswer</key>
+			<string>Austria</string>
+			<key>Answers</key>
+			<array>
+				<string>Germany</string>
+				<string>Switzerland</string>
+				<string>Austria</string>
+				<string>USA</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Which one of these countries is not located in Europe?</string>
+			<key>CorrectAnswer</key>
+			<string>Australia</string>
+			<key>Answers</key>
+			<array>
+				<string>Italy</string>
+				<string>Australia</string>
+				<string>France</string>
+				<string>Greece</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Which one of these brands produces supercars?</string>
+			<key>CorrectAnswer</key>
+			<string>Koenigsegg</string>
+			<key>Answers</key>
+			<array>
+				<string>Ferrero</string>
+				<string>Coca Cola</string>
+				<string>Koenigsegg</string>
+				<string>Skoda</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Which one of these musicians wrote the song Mockingbird#?</string>
+			<key>CorrectAnswer</key>
+			<string>Eminem</string>
+			<key>Answers</key>
+			<array>
+				<string>Eminem</string>
+				<string>Rihanna</string>
+				<string>50 Cent</string>
+				<string>Ed Sheeran</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Question</key>
+			<string>Which one of these is not a religion?</string>
+			<key>CorrectAnswer</key>
+			<string>Squash</string>
+			<key>Answers</key>
+			<array>
+				<string>Christianity</string>
+				<string>Buddhism</string>
+				<string>Judaism</string>
+				<string>Squash</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>1990</string>
+				<string>2019</string>
+				<string>2018</string>
+				<string>2020</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>2020</string>
+			<key>Question</key>
+			<string>What year is it?</string>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Ares</string>
+				<string>Hades</string>
+				<string>Zeus</string>
+				<string>Jupiter</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Zeus</string>
+			<key>Question</key>
+			<string>Who was the father of the gods in greek methology?</string>
+		</dict>
+	</array>
+</dict>
+</plist>
