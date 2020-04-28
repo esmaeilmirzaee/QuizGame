@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Questions</key>
+	<array>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>1990</string>
+				<string>2019</string>
+				<string>2018</string>
+				<string>2020</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>2020</string>
+			<key>Question</key>
+			<string>What year is it?</string>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Ares</string>
+				<string>Hades</string>
+				<string>Zeus</string>
+				<string>Jupiter</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Zeus</string>
+			<key>Question</key>
+			<string>Who was the father of the gods in greek methology?</string>
+		</dict>
+	</array>
+</dict>
+</plist>

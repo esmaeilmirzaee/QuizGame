@@ -24,6 +24,7 @@
 		DA7D2A4D24572E7D006646DF /* Quiz_GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A4C24572E7D006646DF /* Quiz_GameUITests.swift */; };
 		DA7D2A6124572FE2006646DF /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A6024572FE2006646DF /* RoundedButton.swift */; };
 		DACB41B224582DDB00096E9E /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B124582DDB00096E9E /* Paddings.swift */; };
+		DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */ = {isa = PBXBuildFile; fileRef = DACB41B324583CD200096E9E /* MultipleChoice.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		DA7D2A4E24572E7D006646DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA7D2A6024572FE2006646DF /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		DACB41B124582DDB00096E9E /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
+		DACB41B324583CD200096E9E /* MultipleChoice.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultipleChoice.plist; sourceTree = "<group>"; };
 		DBCD8952D5059D3DACF719B2 /* Pods_Quiz_Game_Quiz_GameUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_Game_Quiz_GameUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E36CD5E6BB2711FC103554E2 /* Pods-Quiz Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz Game.release.xcconfig"; path = "Target Support Files/Pods-Quiz Game/Pods-Quiz Game.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 		DA7D2A5F24572EC5006646DF /* Questions */ = {
 			isa = PBXGroup;
 			children = (
+				DACB41B324583CD200096E9E /* MultipleChoice.plist */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */,
 				DA510BC02457788C006F47C1 /* logo.png in Resources */,
 				DA7D2A3724572E7D006646DF /* LaunchScreen.storyboard in Resources */,
 				DA7D2A3424572E7D006646DF /* Assets.xcassets in Resources */,
