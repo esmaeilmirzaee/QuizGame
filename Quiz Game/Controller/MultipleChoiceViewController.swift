@@ -43,6 +43,10 @@ class MultipleChoiceViewController: UIViewController {
     private var questionIndex = 0
     private var currentQuestion: MultipleChoiceQuestion!
     
+    private var timer = Timer()
+    private var score = 0
+    private var highScore = UserDefaults.standard.integer(forKey: multipleChoiceHighScoreIdentifier)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -91,6 +95,8 @@ class MultipleChoiceViewController: UIViewController {
         contentView.addSubview(countDownView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         countDownView.addSubview(progressView)
+        
+        progressView.transform = progressView.transform.scaledBy(x: 1, y: 5)
         
         contentViewConstraints = [
             contentView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -201,5 +207,48 @@ class MultipleChoiceViewController: UIViewController {
             button.backgroundColor = foregroundColour
         }
         questionLabel.text = currentQuestion.question
+        startTimer()
+    }
+    
+    func startTimer() {
+        progressView.progressTintColor = flatGreen
+        progressView.trackTintColor = .clear
+        progressView.progress = 1.0
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateProgressView() {
+        progressView.progress -= 0.01/30
+        if progressView.progress == 0 {
+            print("Game Over")
+        } else if progressView.progress <= 0.2 {
+            progressView.progressTintColor = flatRed
+        } else if progressView.progress <= 0.5 {
+            progressView.progressTintColor = flatOrange
+        }
+    }
+    
+    func outOfTime() {
+        timer.invalidate()
+        showAlert(forReason: 0)
+        for button in answerButtons {
+            button.isEnabled = false
+        }
+    }
+    
+    func showAlert(forReason reason: Int) {
+        let alertViewController = UIAlertController()
+        switch reason {
+        case 0:
+            alertViewController.title = "You lost"
+            alertViewController.message = "You ran out of time"
+            
+        default:
+            break
+        }
+        
+        let ok = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        alertViewController.addAction(ok)
+        present(alertViewController, animated: true, completion: nil)
     }
 }
