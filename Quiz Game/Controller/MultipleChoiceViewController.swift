@@ -81,6 +81,7 @@ class MultipleChoiceViewController: UIViewController {
         
         questionButton.translatesAutoresizingMaskIntoConstraints = false
         questionView.addSubview(questionButton)
+        questionButton.addTarget(self, action: #selector(questionButtonHandler), for: .touchUpInside)
         questionButton.isEnabled = false
         
         answerView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +92,7 @@ class MultipleChoiceViewController: UIViewController {
             answerButtons.append(button)
             button.translatesAutoresizingMaskIntoConstraints = false
             answerView.addSubview(button)
+            button.addTarget(self, action: #selector(answerButtonHandler(_:)), for: .touchUpInside)
         }
         
         countDownView.translatesAutoresizingMaskIntoConstraints = false
@@ -239,12 +241,39 @@ class MultipleChoiceViewController: UIViewController {
         }
     }
     
+    @objc func questionButtonHandler() {
+        questionButton.isEnabled = false
+        questionIndex += 1
+        questionIndex < questionArray.count ? loadNextQuestion() : showAlert(forReason: 2)
+    }
+    
+    @objc func answerButtonHandler(_ sender: RoundedButton) {
+        timer.invalidate()
+        if sender.titleLabel?.text == currentQuestion.correctAnswer {
+            score += 1
+            questionLabel.text = "Tap to continue"
+            questionButton.isEnabled = true
+        } else {
+            sender.backgroundColor = flatRed
+            showAlert(forReason: 1)
+        }
+        for button in answerButtons {
+            button.isEnabled = false
+            if button.titleLabel?.text == currentQuestion.correctAnswer {
+                button.backgroundColor = flatGreen
+            }
+        }
+    }
+    
     func showAlert(forReason reason: Int) {
         
         switch reason {
         case 0:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You ran out of time.", colours: [backgroundColour, foregroundColour])
-            
+        case 1:
+            quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You picked the wrong answer.", colours: [backgroundColour, foregroundColour])
+        case 2:
+                quizAlertView = QuizAlertView(withTitle: "You won.", andMessage: "You answered all the questions.", colours: [backgroundColour, foregroundColour])
         default:
             break
         }
@@ -265,6 +294,11 @@ class MultipleChoiceViewController: UIViewController {
     }
     
     @objc func closeAlert() {
+        if score > highScore {
+            highScore = score
+            UserDefaults.standard.set(highScore, forKey: multipleChoiceHighScoreIdentifier)
+        }
+        UserDefaults.standard.set(score, forKey: multipleChoiceRecentScoreIdentifier)
         _ = navigationController?.popViewController(animated: true)
     }
 }
