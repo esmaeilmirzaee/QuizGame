@@ -11,7 +11,7 @@ import Foundation
 struct MultipleChoiceQuestion {
     let question: String
     let correctAnswer: String
-    let answer: [String]
+    let answers: [String]
 }
 
 enum LoaderError: Error {
@@ -27,7 +27,7 @@ class QuizLoader {
             if let dict = NSDictionary(contentsOfFile: path) {
                 let tempArray: Array = dict["Questions"]! as! [Dictionary<String,AnyObject>]
                 for dictionary in tempArray {
-                    let questionToAdd = MultipleChoiceQuestion(question: dictionary["Question"] as! String, correctAnswer: dictionary["CorrectAnswer"] as! String, answer: dictionary["Answers"] as! [String])
+                    let questionToAdd = MultipleChoiceQuestion(question: dictionary["Question"] as! String, correctAnswer: dictionary["CorrectAnswer"] as! String, answers: dictionary["Answers"] as! [String])
                     questions.append(questionToAdd)
                 }
                 return questions

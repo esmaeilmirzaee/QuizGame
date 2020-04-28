@@ -38,6 +38,11 @@ class MultipleChoiceViewController: UIViewController {
     private let backgroundColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
     private let foregroundColour = UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1.0)
     
+    private let quizLoader = QuizLoader()
+    private var questionArray = [MultipleChoiceQuestion]()
+    private var questionIndex = 0
+    private var currentQuestion: MultipleChoiceQuestion!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -63,7 +68,7 @@ class MultipleChoiceViewController: UIViewController {
         questionView.addSubview(questionLabel)
         questionLabel.backgroundColor = foregroundColour
         questionLabel.textColor = .white
-        questionLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        questionLabel.font = UIFont.boldSystemFont(ofSize: 30)
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 4
         questionLabel.adjustsFontSizeToFitWidth = true
@@ -163,5 +168,38 @@ class MultipleChoiceViewController: UIViewController {
         NSLayoutConstraint.activate(answerButtonsConstraints)
         NSLayoutConstraint.activate(countDownViewConstraints)
         NSLayoutConstraint.activate(progressViewConstraints)
+        
+        loadQuestions()
+    }
+    
+    func loadQuestions() {
+        do {
+            questionArray = try quizLoader.loadMultipleChoiceQuiz(forQuiz: "MultipleChoice")
+            loadNextQuestion()
+        } catch {
+            switch error {
+            case LoaderError.dictionaryFailed:
+                print("Could not load dictionary")
+            case LoaderError.pathFailed:
+                print("Could not find valid file at path")
+            default:
+                print("Unknown Error")
+            }
+        }
+    }
+    
+    func loadNextQuestion() {
+        currentQuestion = questionArray[questionIndex]
+        setTitleForButtons()
+    }
+    
+    func setTitleForButtons() {
+        for (index, button) in answerButtons.enumerated() {
+            button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.setTitle(currentQuestion.answers[index], for: .normal)
+            button.isEnabled = true
+            button.backgroundColor = foregroundColour
+        }
+        questionLabel.text = currentQuestion.question
     }
 }
