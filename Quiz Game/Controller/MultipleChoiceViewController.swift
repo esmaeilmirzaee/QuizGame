@@ -52,6 +52,38 @@ class MultipleChoiceViewController: UIViewController {
     }
     
     func layoutView() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentView)
         
+        questionView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(questionView)
+        
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        questionView.addSubview(questionLabel)
+        questionLabel.backgroundColor = foregroundColour
+        questionLabel.textColor = .white
+        questionLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        questionLabel.textAlignment = .center
+        questionLabel.numberOfLines = 4
+        questionLabel.adjustsFontSizeToFitWidth = true
+        
+        questionButton.translatesAutoresizingMaskIntoConstraints = false
+        questionView.addSubview(questionButton)
+        questionButton.isEnabled = false
+        
+        answerView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(answerView)
+        
+        for _ in 0...3 {
+            let button = RoundedButton()
+            answerButtons.append(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            answerView.addSubview(button)
+        }
+        
+        countDownView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(countDownView)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        countDownView.addSubview(progressView)
     }
 }
