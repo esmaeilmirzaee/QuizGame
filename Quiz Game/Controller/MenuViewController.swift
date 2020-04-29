@@ -175,7 +175,7 @@ class MenuViewController: UIViewController {
             print("Multiple")
             vc = MultipleChoiceViewController()
         case 1:
-            print("Image")
+            vc = ImageQuizViewController()
         case 2:
             print("Right Wrong")
         case 3:
