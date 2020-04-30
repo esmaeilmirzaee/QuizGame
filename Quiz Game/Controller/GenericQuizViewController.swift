@@ -217,6 +217,7 @@ class GenericQuizViewController: UIViewController {
     }
     
     @objc func closeAlert() {
+        // change user defaults identifier
         if score > highScore {
             highScore = score
             UserDefaults.standard.set(highScore, forKey: multipleChoiceHighScoreIdentifier)
