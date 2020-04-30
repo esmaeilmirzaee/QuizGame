@@ -15,7 +15,7 @@ class ImageQuizViewController: UIViewController {
     private let contentView =  UIView()
     private var contentViewConstraints: [NSLayoutConstraint]!
     
-    private let questionView = UIView()
+    private let questionView = UIImageView()
     private var questionViewConstraints: [NSLayoutConstraint]!
     
     private let answerView = UIView()
@@ -24,32 +24,24 @@ class ImageQuizViewController: UIViewController {
     private let countDownView = UIView()
     private var countDownViewConstraints: [NSLayoutConstraint]!
     
-    private let questionLabel = RoundedLabel()
-    private var questionLabelConstraints: [NSLayoutConstraint]!
-    private let questionButton = RoundedButton()
-    private var questionButtonConstraints: [NSLayoutConstraint]!
-    
     private var answerButtons = [RoundedButton]()
     private var answerButtonsConstraints: [NSLayoutConstraint]!
     
     private let progressView = UIProgressView()
     private var progressViewConstraints: [NSLayoutConstraint]!
     
-    // Change Colours
-    private let backgroundColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
-    private let foregroundColour = UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1.0)
+    private let backgroundColour = UIColor(red: 51/255, green: 110/255, blue: 123/255, alpha: 1.0)
+    private let foregroundColour = UIColor(red: 197/255, green: 239/255, blue: 247/255, alpha: 1.0)
     
     private let quizLoader = QuizLoader()
     
-    // Select according question type
     private var questionArray = [MultipleChoiceQuestion]()
     private var questionIndex = 0
     private var currentQuestion: MultipleChoiceQuestion!
     
     private var timer = Timer()
     private var score = 0
-    // Change Identifier
-    private var highScore = UserDefaults.standard.integer(forKey: multipleChoiceHighScoreIdentifier)
+    private var highScore = UserDefaults.standard.integer(forKey: imageQuizHighScoreIdentifier)
     
     
     private var quizAlertView: QuizAlertView!
@@ -74,7 +66,13 @@ class ImageQuizViewController: UIViewController {
         
         answerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(answerView)
-        
+        for _ in 0...3 {
+            let button = RoundedButton()
+            answerButtons.append(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            answerView.addSubview(button)
+            button.addTarget(self, action: #selector(answerButtonHandler(_:)), for: .touchUpInside)
+        }
         
         countDownView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(countDownView)
@@ -104,6 +102,26 @@ class ImageQuizViewController: UIViewController {
             answerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: paddings.fourTenth)
         ]
         
+        answerButtonsConstraints = [
+            answerButtons[0].leadingAnchor.constraint(equalTo: answerView.leadingAnchor),
+            answerButtons[0].trailingAnchor.constraint(equalTo: answerButtons[1].leadingAnchor, constant: paddings.minusEight),
+            answerButtons[0].topAnchor.constraint(equalTo: answerView.topAnchor),
+            answerButtons[0].bottomAnchor.constraint(equalTo: answerButtons[2].topAnchor, constant: -8.0),
+            answerButtons[1].trailingAnchor.constraint(equalTo: answerView.trailingAnchor),
+            answerButtons[1].topAnchor.constraint(equalTo: answerView.topAnchor),
+            answerButtons[1].bottomAnchor.constraint(equalTo: answerButtons[3].topAnchor, constant: paddings.minusEight),
+            answerButtons[2].leadingAnchor.constraint(equalTo: answerView.leadingAnchor),
+            answerButtons[2].trailingAnchor.constraint(equalTo: answerButtons[3].leadingAnchor, constant: paddings.minusEight),
+            answerButtons[2].bottomAnchor.constraint(equalTo: answerView.bottomAnchor),
+            answerButtons[3].trailingAnchor.constraint(equalTo: answerView.trailingAnchor),
+            answerButtons[3].bottomAnchor.constraint(equalTo: answerView.bottomAnchor)
+        ]
+        
+        for index in 1..<answerButtons.count {
+            answerButtonsConstraints.append(answerButtons[index].heightAnchor.constraint(equalTo: answerButtons[index-1].heightAnchor))
+            answerButtonsConstraints.append(answerButtons[index].widthAnchor.constraint(equalTo: answerButtons[index-1].widthAnchor))
+        }
+        
         countDownViewConstraints = [
             countDownView.topAnchor.constraint(equalTo: answerView.bottomAnchor, constant: paddings.twenty),
             countDownView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddings.twenty),
@@ -120,6 +138,7 @@ class ImageQuizViewController: UIViewController {
         NSLayoutConstraint.activate(contentViewConstraints)
         NSLayoutConstraint.activate(questionViewConstraints)
         NSLayoutConstraint.activate(answerViewConstraints)
+        NSLayoutConstraint.activate(answerButtonsConstraints)
         NSLayoutConstraint.activate(countDownViewConstraints)
         NSLayoutConstraint.activate(progressViewConstraints)
         
@@ -128,8 +147,7 @@ class ImageQuizViewController: UIViewController {
     
     func loadQuestions() {
         do {
-            // load the appropriate questions
-            questionArray = try quizLoader.loadMultipleChoiceQuiz(forQuiz: "MultipleChoice")
+            questionArray = try quizLoader.loadMultipleChoiceQuiz(forQuiz: "ImageQuiz")
             loadNextQuestion()
         } catch {
             switch error {
@@ -143,12 +161,23 @@ class ImageQuizViewController: UIViewController {
         }
     }
     
-    func loadNextQuestion() {
+    @objc func loadNextQuestion() {
+        if quizAlertView != nil {
+            quizAlertView.removeFromSuperview()
+        }
         currentQuestion = questionArray[questionIndex]
         setTitleForButtons()
     }
     
     func setTitleForButtons() {
+        for (index, button) in answerButtons.enumerated() {
+            button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.setTitle(currentQuestion.answers[index], for: .normal)
+            button.isEnabled = true
+            button.backgroundColor = foregroundColour
+            button.setTitleColor(UIColor.darkGray, for: .normal)
+        }
+        questionView.image = UIImage(named: currentQuestion.question)
         startTimer()
     }
     
@@ -174,17 +203,27 @@ class ImageQuizViewController: UIViewController {
     func outOfTime() {
         timer.invalidate()
         showAlert(forReason: 0)
+        for button in answerButtons {
+            button.isEnabled = false
+        }
     }
     
     @objc func answerButtonHandler(_ sender: RoundedButton) {
         timer.invalidate()
         if sender.titleLabel?.text == currentQuestion.correctAnswer {
             score += 1
-            questionLabel.text = "Tap to continue"
-            questionButton.isEnabled = true
+            questionIndex += 1
+            questionIndex < questionArray.count ? showAlert(forReason: 3) : showAlert(forReason: 2)
         } else {
             sender.backgroundColor = flatRed
             showAlert(forReason: 1)
+        }
+        for button in answerButtons {
+            button.isEnabled = false
+            
+            if button.titleLabel?.text == currentQuestion.correctAnswer {
+                button.backgroundColor = flatGreen
+            }
         }
     }
     
@@ -193,16 +232,26 @@ class ImageQuizViewController: UIViewController {
         switch reason {
         case 0:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You ran out of time.", colours: [backgroundColour, foregroundColour])
+            
+            quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
         case 1:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You picked the wrong answer.", colours: [backgroundColour, foregroundColour])
+            
+            quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
         case 2:
                 quizAlertView = QuizAlertView(withTitle: "You won.", andMessage: "You answered all the questions.", colours: [backgroundColour, foregroundColour])
+            
+            quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
+        case 3:
+            quizAlertView = QuizAlertView(withTitle: "Correct!", andMessage: "Tap continue to get the next question", colours: [backgroundColour, foregroundColour])
+            
+            quizAlertView.closeButton.addTarget(self, action: #selector(loadNextQuestion), for: .touchUpInside)
         default:
             break
         }
         
         if let quizAlertView = quizAlertView {
-            quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
+            quizAlertView.closeButton.setTitleColor(.darkGray, for: .normal)
             createQuizAlertView(withAlert: quizAlertView)
         }
     }
@@ -219,9 +268,9 @@ class ImageQuizViewController: UIViewController {
     @objc func closeAlert() {
         if score > highScore {
             highScore = score
-            UserDefaults.standard.set(highScore, forKey: multipleChoiceHighScoreIdentifier)
+            UserDefaults.standard.set(highScore, forKey: imageQuizHighScoreIdentifier)
         }
-        UserDefaults.standard.set(score, forKey: multipleChoiceRecentScoreIdentifier)
+        UserDefaults.standard.set(score, forKey: imageQuizRecentScoreIdentifier)
         _ = navigationController?.popViewController(animated: true)
     }
     
