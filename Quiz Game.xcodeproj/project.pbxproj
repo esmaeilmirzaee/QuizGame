@@ -15,6 +15,7 @@
 		DA510BC02457788C006F47C1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DA510BBF2457788C006F47C1 /* logo.png */; };
 		DA510BC224577B49006F47C1 /* MultipleChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA510BC124577B49006F47C1 /* MultipleChoiceViewController.swift */; };
 		DA65D2BB245BE54400B89E5A /* EmojiQuiz.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA65D2BA245BE54400B89E5A /* EmojiQuiz.plist */; };
+		DA65D2BD245BFFF700B89E5A /* EmojiQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65D2BC245BFFF700B89E5A /* EmojiQuizViewController.swift */; };
 		DA7D2A2B24572E7B006646DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A2A24572E7B006646DF /* AppDelegate.swift */; };
 		DA7D2A2D24572E7B006646DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A2C24572E7B006646DF /* SceneDelegate.swift */; };
 		DA7D2A2F24572E7B006646DF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A2E24572E7B006646DF /* MenuViewController.swift */; };
@@ -67,6 +68,7 @@
 		DA510BBF2457788C006F47C1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DA510BC124577B49006F47C1 /* MultipleChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceViewController.swift; sourceTree = "<group>"; };
 		DA65D2BA245BE54400B89E5A /* EmojiQuiz.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EmojiQuiz.plist; sourceTree = "<group>"; };
+		DA65D2BC245BFFF700B89E5A /* EmojiQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiQuizViewController.swift; sourceTree = "<group>"; };
 		DA7D2A2724572E7B006646DF /* Quiz Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quiz Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7D2A2A24572E7B006646DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA7D2A2C24572E7B006646DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				DA3BB86E245730D70080C983 /* RoundedLabel.swift */,
 				DA510BC124577B49006F47C1 /* MultipleChoiceViewController.swift */,
 				DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */,
+				DA65D2BC245BFFF700B89E5A /* EmojiQuizViewController.swift */,
 				DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */,
 			);
 			path = Controller;
@@ -522,6 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA65D2BD245BFFF700B89E5A /* EmojiQuizViewController.swift in Sources */,
 				DA7D2A2F24572E7B006646DF /* MenuViewController.swift in Sources */,
 				DA3BB86F245730D70080C983 /* RoundedLabel.swift in Sources */,
 				DA510BC224577B49006F47C1 /* MultipleChoiceViewController.swift in Sources */,

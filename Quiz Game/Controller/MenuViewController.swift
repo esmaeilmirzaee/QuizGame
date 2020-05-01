@@ -179,7 +179,7 @@ class MenuViewController: UIViewController {
         case 2:
             print("Right Wrong")
         case 3:
-            print("Emoji")
+            vc = EmojiQuizViewController()
         default:
             break
         }
