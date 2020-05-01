@@ -161,6 +161,7 @@ class ImageQuizViewController: UIViewController {
                 imageGridViews[index].topAnchor.constraint(equalTo: imageGridViews[0].bottomAnchor).isActive = true
             }
             if [6, 7, 8].contains(index) {
+                imageGridViews[index].topAnchor.constraint(equalTo: imageGridViews[3].bottomAnchor).isActive = true
                 imageGridViews[index].bottomAnchor.constraint(equalTo: questionView.bottomAnchor).isActive = true
             }
             if [0, 3, 6].contains(index) {
@@ -171,7 +172,7 @@ class ImageQuizViewController: UIViewController {
             }
             if [2, 5, 8].contains(index) {
                 imageGridViews[index].leadingAnchor.constraint(equalTo: imageGridViews[1].trailingAnchor).isActive = true
-                imageGridViews[index].trailingAnchor.constraint(equalTo: questionView.trailingAnchor)
+                imageGridViews[index].trailingAnchor.constraint(equalTo: questionView.trailingAnchor).isActive = true
             }
             if index > 0 {
                 imageGridViews[index].heightAnchor.constraint(equalTo: imageGridViews[index-1].heightAnchor).isActive = true
@@ -269,19 +270,15 @@ class ImageQuizViewController: UIViewController {
         switch reason {
         case 0:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You ran out of time.", colours: [backgroundColour, foregroundColour])
-            
             quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
         case 1:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You picked the wrong answer.", colours: [backgroundColour, foregroundColour])
-            
             quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
         case 2:
-                quizAlertView = QuizAlertView(withTitle: "You won.", andMessage: "You answered all the questions.", colours: [backgroundColour, foregroundColour])
-            
+            quizAlertView = QuizAlertView(withTitle: "You won.", andMessage: "You answered all the questions.", colours: [backgroundColour, foregroundColour])
             quizAlertView.closeButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
         case 3:
             quizAlertView = QuizAlertView(withTitle: "Correct!", andMessage: "Tap continue to get the next question", colours: [backgroundColour, foregroundColour])
-            
             quizAlertView.closeButton.addTarget(self, action: #selector(loadNextQuestion), for: .touchUpInside)
         default:
             break
