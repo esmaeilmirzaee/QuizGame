@@ -23,6 +23,12 @@
 		DA7D2A4224572E7D006646DF /* Quiz_GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A4124572E7D006646DF /* Quiz_GameTests.swift */; };
 		DA7D2A4D24572E7D006646DF /* Quiz_GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A4C24572E7D006646DF /* Quiz_GameUITests.swift */; };
 		DA7D2A6124572FE2006646DF /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D2A6024572FE2006646DF /* RoundedButton.swift */; };
+		DABE8B39245A44A200BF6B2E /* burger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B35245A44A200BF6B2E /* burger.jpg */; };
+		DABE8B3A245A44A200BF6B2E /* apple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B36245A44A200BF6B2E /* apple.jpg */; };
+		DABE8B3B245A44A200BF6B2E /* tomato.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B37245A44A200BF6B2E /* tomato.jpg */; };
+		DABE8B3C245A44A200BF6B2E /* hammer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B38245A44A200BF6B2E /* hammer.jpg */; };
+		DABE8B3E245A44B300BF6B2E /* ImageQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */; };
+		DABE8B40245A450F00BF6B2E /* ImageQuiz.plist in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */; };
 		DAC7DB0A2459F046003B1402 /* GenericQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */; };
 		DACB41B224582DDB00096E9E /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B124582DDB00096E9E /* Paddings.swift */; };
 		DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */ = {isa = PBXBuildFile; fileRef = DACB41B324583CD200096E9E /* MultipleChoice.plist */; };
@@ -74,6 +80,12 @@
 		DA7D2A4C24572E7D006646DF /* Quiz_GameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz_GameUITests.swift; sourceTree = "<group>"; };
 		DA7D2A4E24572E7D006646DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA7D2A6024572FE2006646DF /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		DABE8B35245A44A200BF6B2E /* burger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = burger.jpg; sourceTree = "<group>"; };
+		DABE8B36245A44A200BF6B2E /* apple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = apple.jpg; sourceTree = "<group>"; };
+		DABE8B37245A44A200BF6B2E /* tomato.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tomato.jpg; sourceTree = "<group>"; };
+		DABE8B38245A44A200BF6B2E /* hammer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hammer.jpg; sourceTree = "<group>"; };
+		DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageQuizViewController.swift; sourceTree = "<group>"; };
+		DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ImageQuiz.plist; sourceTree = "<group>"; };
 		DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQuizViewController.swift; sourceTree = "<group>"; };
 		DACB41B124582DDB00096E9E /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
 		DACB41B324583CD200096E9E /* MultipleChoice.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultipleChoice.plist; sourceTree = "<group>"; };
@@ -138,6 +150,10 @@
 			isa = PBXGroup;
 			children = (
 				DA510BBF2457788C006F47C1 /* logo.png */,
+				DABE8B36245A44A200BF6B2E /* apple.jpg */,
+				DABE8B35245A44A200BF6B2E /* burger.jpg */,
+				DABE8B38245A44A200BF6B2E /* hammer.jpg */,
+				DABE8B37245A44A200BF6B2E /* tomato.jpg */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -222,6 +238,7 @@
 				DA3BB86E245730D70080C983 /* RoundedLabel.swift */,
 				DA510BC124577B49006F47C1 /* MultipleChoiceViewController.swift */,
 				DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */,
+				DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -250,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				DACB41B324583CD200096E9E /* MultipleChoice.plist */,
+				DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -363,10 +381,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DABE8B3C245A44A200BF6B2E /* hammer.jpg in Resources */,
 				DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */,
 				DA510BC02457788C006F47C1 /* logo.png in Resources */,
+				DABE8B40245A450F00BF6B2E /* ImageQuiz.plist in Resources */,
 				DA7D2A3724572E7D006646DF /* LaunchScreen.storyboard in Resources */,
+				DABE8B3A245A44A200BF6B2E /* apple.jpg in Resources */,
 				DA7D2A3424572E7D006646DF /* Assets.xcassets in Resources */,
+				DABE8B3B245A44A200BF6B2E /* tomato.jpg in Resources */,
+				DABE8B39245A44A200BF6B2E /* burger.jpg in Resources */,
 				DA7D2A3224572E7B006646DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +529,7 @@
 				DA7D2A6124572FE2006646DF /* RoundedButton.swift in Sources */,
 				DACB41B6245843BF00096E9E /* QuizLoader.swift in Sources */,
 				DA510BBD2457661C006F47C1 /* Constants+Extensions.swift in Sources */,
+				DABE8B3E245A44B300BF6B2E /* ImageQuizViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

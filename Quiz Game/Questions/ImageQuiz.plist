@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Questions</key>
+	<array>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Burger</string>
+				<string>Tomato</string>
+				<string>Apple</string>
+				<string>Hammer</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Hammer</string>
+			<key>Question</key>
+			<string>hammer.jpg</string>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Burger</string>
+				<string>Tomato</string>
+				<string>Apple</string>
+				<string>Hammer</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Burger</string>
+			<key>Question</key>
+			<string>burger.jpg</string>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Burger</string>
+				<string>Tomato</string>
+				<string>Apple</string>
+				<string>Hammer</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Tomato</string>
+			<key>Question</key>
+			<string>tomato.jpg</string>
+		</dict>
+		<dict>
+			<key>Answers</key>
+			<array>
+				<string>Burger</string>
+				<string>Tomato</string>
+				<string>Apple</string>
+				<string>Hammer</string>
+			</array>
+			<key>CorrectAnswer</key>
+			<string>Apple</string>
+			<key>Question</key>
+			<string>apple.jpg</string>
+		</dict>
+	</array>
+</dict>
+</plist>
