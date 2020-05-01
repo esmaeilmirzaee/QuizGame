@@ -70,7 +70,18 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
         
         questionView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(questionView)
-        
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        questionView.addSubview(questionLabel)
+        questionLabel.backgroundColor = foregroundColour
+        questionLabel.textColor = .white
+        questionLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        questionLabel.textAlignment = .center
+        questionLabel.numberOfLines = 4
+        questionLabel.adjustsFontSizeToFitWidth = true
+        questionButton.translatesAutoresizingMaskIntoConstraints = false
+        questionView.addSubview(questionButton)
+        questionButton.addTarget(self, action: #selector(questionButtonHandler), for: .touchUpInside)
+        questionButton.isEnabled = false
         
         answerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(answerView)
@@ -106,6 +117,20 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
             questionView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: paddings.fourTenth)
         ]
         
+        questionLabelConstraints = [
+            questionLabel.topAnchor.constraint(equalTo: questionView.topAnchor),
+            questionLabel.leadingAnchor.constraint(equalTo: questionView.leadingAnchor),
+            questionLabel.trailingAnchor.constraint(equalTo: questionView.trailingAnchor),
+            questionLabel.bottomAnchor.constraint(equalTo: questionView.bottomAnchor)
+        ]
+        
+        questionButtonConstraints = [
+            questionButton.topAnchor.constraint(equalTo: questionView.topAnchor),
+            questionButton.leadingAnchor.constraint(equalTo: questionView.leadingAnchor),
+            questionButton.trailingAnchor.constraint(equalTo: questionView.trailingAnchor),
+            questionButton.bottomAnchor.constraint(equalTo: questionView.bottomAnchor)
+        ]
+        
         answerViewConstraints = [
             answerView.topAnchor.constraint(equalTo: questionView.bottomAnchor, constant: paddings.twenty),
             answerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddings.twenty),
@@ -135,6 +160,8 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate(contentViewConstraints)
         NSLayoutConstraint.activate(questionViewConstraints)
+        NSLayoutConstraint.activate(questionLabelConstraints)
+        NSLayoutConstraint.activate(questionButtonConstraints)
         NSLayoutConstraint.activate(answerViewConstraints)
         NSLayoutConstraint.activate(answerTextFieldConstraints)
         NSLayoutConstraint.activate(countDownViewConstraints)
@@ -165,6 +192,11 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setTitleForButtons() {
+        questionLabel.backgroundColor = foregroundColour
+        questionLabel.text = currentQuestion.question
+        answerTextField.text = nil
+        answerTextField.placeholder = "Answer"
+        answerTextField.isEnabled = true
         startTimer()
     }
     
@@ -192,16 +224,34 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
         showAlert(forReason: 0)
     }
     
-    @objc func answerButtonHandler(_ sender: RoundedButton) {
+    @objc func questionButtonHandler() {
+        questionButton.isEnabled = false
+        questionIndex += 1
+        print("\(questionIndex)")
+        questionIndex < questionArray.count ? loadNextQuestion() : showAlert(forReason: 2)
+        
+    }
+    
+    func checkAnswer(withString string: String) {
         timer.invalidate()
-        if sender.titleLabel?.text == currentQuestion.correctAnswer {
-            score += 1
-            questionLabel.text = "Tap to continue"
+        answerTextField.isEnabled = false
+        if string == currentQuestion.correctAnswer {
+            questionLabel.backgroundColor = flatGreen
             questionButton.isEnabled = true
+            score += 1
         } else {
-            sender.backgroundColor = flatRed
+            questionLabel.backgroundColor = flatRed
             showAlert(forReason: 1)
         }
+        questionLabel.text = currentQuestion.correctAnswer
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if let string = textField.text?.uppercased() {
+            checkAnswer(withString: string)
+        }
+        return true
     }
     
     func showAlert(forReason reason: Int) {
@@ -210,7 +260,7 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
         case 0:
             quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You ran out of time.", colours: [backgroundColour, foregroundColour])
         case 1:
-            quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You picked the wrong answer.", colours: [backgroundColour, foregroundColour])
+            quizAlertView = QuizAlertView(withTitle: "You lost.", andMessage: "You entered the wrong answer.", colours: [backgroundColour, foregroundColour])
         case 2:
                 quizAlertView = QuizAlertView(withTitle: "You won.", andMessage: "You answered all the questions.", colours: [backgroundColour, foregroundColour])
         default:
