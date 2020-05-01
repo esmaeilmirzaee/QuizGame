@@ -215,7 +215,12 @@ class ImageQuizViewController: UIViewController {
             button.backgroundColor = foregroundColour
             button.setTitleColor(UIColor.darkGray, for: .normal)
         }
+        for view in imageGridViews {
+            view.alpha = 1.0
+        }
         questionView.image = UIImage(named: currentQuestion.question)
+        revealIndex = 0
+        revealTile()
         startTimer()
     }
     
@@ -224,6 +229,16 @@ class ImageQuizViewController: UIViewController {
         progressView.trackTintColor = .clear
         progressView.progress = 1.0
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        revealTimer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(revealTile), userInfo: nil, repeats: true)
+    }
+    
+    @objc func revealTile() {
+        if revealIndex < imageGridViews.count {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.imageGridViews[self.revealIndex].alpha = 0.0
+            })
+            revealIndex += 1
+        }
     }
     
     @objc func updateProgressView() {
@@ -239,6 +254,7 @@ class ImageQuizViewController: UIViewController {
     }
     
     func outOfTime() {
+        revealTimer.invalidate()
         timer.invalidate()
         showAlert(forReason: 0)
         for button in answerButtons {
@@ -247,9 +263,13 @@ class ImageQuizViewController: UIViewController {
     }
     
     @objc func answerButtonHandler(_ sender: RoundedButton) {
+        for view in imageGridViews {
+            view.alpha = 0.0
+        }
+        revealTimer.invalidate()
         timer.invalidate()
         if sender.titleLabel?.text == currentQuestion.correctAnswer {
-            score += 1
+            score += 1 + (imageGridViews.count - revealIndex)
             questionIndex += 1
             questionIndex < questionArray.count ? showAlert(forReason: 3) : showAlert(forReason: 2)
         } else {
@@ -311,6 +331,7 @@ class ImageQuizViewController: UIViewController {
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
         if parent == nil {
+            revealTimer.invalidate()
             timer.invalidate()
         }
     }
