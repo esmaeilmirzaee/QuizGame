@@ -218,6 +218,7 @@ class ImageQuizViewController: UIViewController {
         for view in imageGridViews {
             view.alpha = 1.0
         }
+        imageGridViews.shuffle()
         questionView.image = UIImage(named: currentQuestion.question)
         revealIndex = 0
         revealTile()
