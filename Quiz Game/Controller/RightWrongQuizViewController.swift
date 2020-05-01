@@ -58,7 +58,6 @@ class RightWrongQuizViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-        
     }
     
     func layoutView() {
@@ -88,7 +87,7 @@ class RightWrongQuizViewController: UIViewController {
             button.translatesAutoresizingMaskIntoConstraints = false
             answerView.addSubview(button)
             index == 0 ? button.setTitle("Correct", for: .normal) : button.setTitle("Wrong", for: .normal)
-            button.addTarget(self, action: #selector(answerButtonHandler(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(answerButtonHandler), for: .touchUpInside)
         }
         
         countDownView.translatesAutoresizingMaskIntoConstraints = false
@@ -172,7 +171,7 @@ class RightWrongQuizViewController: UIViewController {
     
     func loadQuestions() {
         do {
-            questionArray = try quizLoader.loadSimpleQuiz(forQuiz: "RightWrong")
+            questionArray = try quizLoader.loadSimpleQuiz(forQuiz: "RightWrongQuiz")
             loadNextQuestion()
         } catch {
             switch error {
@@ -192,6 +191,12 @@ class RightWrongQuizViewController: UIViewController {
     }
     
     func setTitleForButtons() {
+        for button in answerButtons {
+            button.isEnabled = true
+            button.backgroundColor = foregroundColour
+            button.setTitleColor(.darkGray, for: .normal)
+        }
+        questionLabel.text = currentQuestion.question
         startTimer()
     }
     
@@ -220,7 +225,9 @@ class RightWrongQuizViewController: UIViewController {
     }
     
     @objc func questionButtonHandler() {
-        
+        questionButton.isEnabled = false
+        questionIndex += 1
+        questionIndex < questionArray.count ? loadNextQuestion() : showAlert(forReason: 2)
     }
     
     @objc func answerButtonHandler(_ sender: RoundedButton) {
@@ -231,7 +238,15 @@ class RightWrongQuizViewController: UIViewController {
             questionButton.isEnabled = true
         } else {
             sender.backgroundColor = flatRed
+            sender.setTitleColor(.white, for: .normal)
             showAlert(forReason: 1)
+        }
+        for button in answerButtons {
+            button.isEnabled = false
+            if button.titleLabel?.text == currentQuestion.correctAnswer {
+                button.backgroundColor = flatGreen
+                button.setTitleColor(.white, for: .normal)
+            }
         }
     }
     
