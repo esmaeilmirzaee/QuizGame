@@ -1,5 +1,5 @@
 //
-//  MultipleChoiceViewController.swift
+//  RightWrongQuizViewController.swift
 //  Quiz Game
 //
 //  Created by Esmaeil MIRZAEE on 2020-04-27.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MultipleChoiceViewController: UIViewController {
+class RightWrongQuizViewController: UIViewController {
 
     private let paddings = Paddings()
     
@@ -35,32 +35,29 @@ class MultipleChoiceViewController: UIViewController {
     private let progressView = UIProgressView()
     private var progressViewConstraints: [NSLayoutConstraint]!
     
-    private let backgroundColour = UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)
-    private let foregroundColour = UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1.0)
+    private let backgroundColour = UIColor(red: 189/255, green: 195/255, blue: 199/255, alpha: 1.0)
+    private let foregroundColour = UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
     
     private let quizLoader = QuizLoader()
-    private var questionArray = [MultipleChoiceQuestion]()
+    
+    private var questionArray = [SimpleQuestion]()
     private var questionIndex = 0
-    private var currentQuestion: MultipleChoiceQuestion!
+    private var currentQuestion: SimpleQuestion!
     
     private var timer = Timer()
     private var score = 0
-    private var highScore = UserDefaults.standard.integer(forKey: multipleChoiceHighScoreIdentifier)
+    private var highScore = UserDefaults.standard.integer(forKey: rightWrongHighScoreIdentifier)
     
     
     private var quizAlertView: QuizAlertView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = .systemBlue
         view.backgroundColor = backgroundColour
-        
         layoutView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-        
     }
     
     func layoutView() {
@@ -69,11 +66,10 @@ class MultipleChoiceViewController: UIViewController {
         
         questionView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(questionView)
-        
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionView.addSubview(questionLabel)
         questionLabel.backgroundColor = foregroundColour
-        questionLabel.textColor = .white
+        questionLabel.textColor = .darkGray
         questionLabel.font = UIFont.boldSystemFont(ofSize: 30)
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 4
@@ -85,13 +81,13 @@ class MultipleChoiceViewController: UIViewController {
         
         answerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(answerView)
-        
-        for _ in 0...3 {
+        for index in 0...1 {
             let button = RoundedButton()
             answerButtons.append(button)
             button.translatesAutoresizingMaskIntoConstraints = false
             answerView.addSubview(button)
-            button.addTarget(self, action: #selector(answerButtonHandler(_:)), for: .touchUpInside)
+            index == 0 ? button.setTitle("Correct", for: .normal) : button.setTitle("Wrong", for: .normal)
+            button.addTarget(self, action: #selector(answerButtonHandler), for: .touchUpInside)
         }
         
         countDownView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,23 +134,15 @@ class MultipleChoiceViewController: UIViewController {
         
         answerButtonsConstraints = [
             answerButtons[0].leadingAnchor.constraint(equalTo: answerView.leadingAnchor),
-            answerButtons[0].trailingAnchor.constraint(equalTo: answerButtons[1].leadingAnchor, constant: paddings.minusEight),
+            answerButtons[0].trailingAnchor.constraint(equalTo: answerView.trailingAnchor),
             answerButtons[0].topAnchor.constraint(equalTo: answerView.topAnchor),
-            answerButtons[0].bottomAnchor.constraint(equalTo: answerButtons[2].topAnchor, constant: -8.0),
+            answerButtons[0].bottomAnchor.constraint(equalTo: answerButtons[1].topAnchor, constant: -8.0),
+            answerButtons[1].leadingAnchor.constraint(equalTo: answerView.leadingAnchor),
             answerButtons[1].trailingAnchor.constraint(equalTo: answerView.trailingAnchor),
-            answerButtons[1].topAnchor.constraint(equalTo: answerView.topAnchor),
-            answerButtons[1].bottomAnchor.constraint(equalTo: answerButtons[3].topAnchor, constant: paddings.minusEight),
-            answerButtons[2].leadingAnchor.constraint(equalTo: answerView.leadingAnchor),
-            answerButtons[2].trailingAnchor.constraint(equalTo: answerButtons[3].leadingAnchor, constant: paddings.minusEight),
-            answerButtons[2].bottomAnchor.constraint(equalTo: answerView.bottomAnchor),
-            answerButtons[3].trailingAnchor.constraint(equalTo: answerView.trailingAnchor),
-            answerButtons[3].bottomAnchor.constraint(equalTo: answerView.bottomAnchor)
+            answerButtons[1].bottomAnchor.constraint(equalTo: answerView.bottomAnchor),
+            answerButtons[0].heightAnchor.constraint(equalTo: answerButtons[1].heightAnchor),
+            answerButtons[0].widthAnchor.constraint(equalTo: answerButtons[1].widthAnchor)
         ]
-        
-        for index in 1..<answerButtons.count {
-            answerButtonsConstraints.append(answerButtons[index].heightAnchor.constraint(equalTo: answerButtons[index-1].heightAnchor))
-            answerButtonsConstraints.append(answerButtons[index].widthAnchor.constraint(equalTo: answerButtons[index-1].widthAnchor))
-        }
         
         countDownViewConstraints = [
             countDownView.topAnchor.constraint(equalTo: answerView.bottomAnchor, constant: paddings.twenty),
@@ -183,7 +171,7 @@ class MultipleChoiceViewController: UIViewController {
     
     func loadQuestions() {
         do {
-            questionArray = try quizLoader.loadMultipleChoiceQuiz(forQuiz: "MultipleChoice")
+            questionArray = try quizLoader.loadSimpleQuiz(forQuiz: "RightWrongQuiz")
             loadNextQuestion()
         } catch {
             switch error {
@@ -203,11 +191,10 @@ class MultipleChoiceViewController: UIViewController {
     }
     
     func setTitleForButtons() {
-        for (index, button) in answerButtons.enumerated() {
-            button.titleLabel?.lineBreakMode = .byWordWrapping
-            button.setTitle(currentQuestion.answers[index], for: .normal)
+        for button in answerButtons {
             button.isEnabled = true
             button.backgroundColor = foregroundColour
+            button.setTitleColor(.darkGray, for: .normal)
         }
         questionLabel.text = currentQuestion.question
         startTimer()
@@ -235,9 +222,6 @@ class MultipleChoiceViewController: UIViewController {
     func outOfTime() {
         timer.invalidate()
         showAlert(forReason: 0)
-        for button in answerButtons {
-            button.isEnabled = false
-        }
     }
     
     @objc func questionButtonHandler() {
@@ -254,12 +238,14 @@ class MultipleChoiceViewController: UIViewController {
             questionButton.isEnabled = true
         } else {
             sender.backgroundColor = flatRed
+            sender.setTitleColor(.white, for: .normal)
             showAlert(forReason: 1)
         }
         for button in answerButtons {
             button.isEnabled = false
             if button.titleLabel?.text == currentQuestion.correctAnswer {
                 button.backgroundColor = flatGreen
+                button.setTitleColor(.white, for: .normal)
             }
         }
     }
@@ -295,9 +281,9 @@ class MultipleChoiceViewController: UIViewController {
     @objc func closeAlert() {
         if score > highScore {
             highScore = score
-            UserDefaults.standard.set(highScore, forKey: multipleChoiceHighScoreIdentifier)
+            UserDefaults.standard.set(highScore, forKey: rightWrongHighScoreIdentifier)
         }
-        UserDefaults.standard.set(score, forKey: multipleChoiceRecentScoreIdentifier)
+        UserDefaults.standard.set(score, forKey: rightWrongRecentScoreIdentifier)
         _ = navigationController?.popViewController(animated: true)
     }
     

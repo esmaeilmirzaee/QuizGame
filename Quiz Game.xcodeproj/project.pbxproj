@@ -32,6 +32,8 @@
 		DABE8B3E245A44B300BF6B2E /* ImageQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */; };
 		DABE8B40245A450F00BF6B2E /* ImageQuiz.plist in Resources */ = {isa = PBXBuildFile; fileRef = DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */; };
 		DAC7DB0A2459F046003B1402 /* GenericQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */; };
+		DACA5696245C65A400F4D06F /* RightWrongQuiz.plist in Resources */ = {isa = PBXBuildFile; fileRef = DACA5695245C65A400F4D06F /* RightWrongQuiz.plist */; };
+		DACA5698245C697200F4D06F /* RightWrongQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACA5697245C697200F4D06F /* RightWrongQuizViewController.swift */; };
 		DACB41B224582DDB00096E9E /* Paddings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B124582DDB00096E9E /* Paddings.swift */; };
 		DACB41B424583CD200096E9E /* MultipleChoice.plist in Resources */ = {isa = PBXBuildFile; fileRef = DACB41B324583CD200096E9E /* MultipleChoice.plist */; };
 		DACB41B6245843BF00096E9E /* QuizLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB41B5245843BF00096E9E /* QuizLoader.swift */; };
@@ -91,6 +93,8 @@
 		DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageQuizViewController.swift; sourceTree = "<group>"; };
 		DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ImageQuiz.plist; sourceTree = "<group>"; };
 		DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQuizViewController.swift; sourceTree = "<group>"; };
+		DACA5695245C65A400F4D06F /* RightWrongQuiz.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RightWrongQuiz.plist; sourceTree = "<group>"; };
+		DACA5697245C697200F4D06F /* RightWrongQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightWrongQuizViewController.swift; sourceTree = "<group>"; };
 		DACB41B124582DDB00096E9E /* Paddings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paddings.swift; sourceTree = "<group>"; };
 		DACB41B324583CD200096E9E /* MultipleChoice.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MultipleChoice.plist; sourceTree = "<group>"; };
 		DACB41B5245843BF00096E9E /* QuizLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizLoader.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				DA3BB86E245730D70080C983 /* RoundedLabel.swift */,
 				DA510BC124577B49006F47C1 /* MultipleChoiceViewController.swift */,
 				DAC7DB092459F046003B1402 /* GenericQuizViewController.swift */,
+				DACA5697245C697200F4D06F /* RightWrongQuizViewController.swift */,
 				DA65D2BC245BFFF700B89E5A /* EmojiQuizViewController.swift */,
 				DABE8B3D245A44B300BF6B2E /* ImageQuizViewController.swift */,
 			);
@@ -274,6 +279,7 @@
 				DACB41B324583CD200096E9E /* MultipleChoice.plist */,
 				DABE8B3F245A450F00BF6B2E /* ImageQuiz.plist */,
 				DA65D2BA245BE54400B89E5A /* EmojiQuiz.plist */,
+				DACA5695245C65A400F4D06F /* RightWrongQuiz.plist */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				DA7D2A3424572E7D006646DF /* Assets.xcassets in Resources */,
 				DABE8B3B245A44A200BF6B2E /* tomato.jpg in Resources */,
 				DABE8B39245A44A200BF6B2E /* burger.jpg in Resources */,
+				DACA5696245C65A400F4D06F /* RightWrongQuiz.plist in Resources */,
 				DA7D2A3224572E7B006646DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +536,7 @@
 				DA7D2A2F24572E7B006646DF /* MenuViewController.swift in Sources */,
 				DA3BB86F245730D70080C983 /* RoundedLabel.swift in Sources */,
 				DA510BC224577B49006F47C1 /* MultipleChoiceViewController.swift in Sources */,
+				DACA5698245C697200F4D06F /* RightWrongQuizViewController.swift in Sources */,
 				DACB41B224582DDB00096E9E /* Paddings.swift in Sources */,
 				DACB41B824586B6F00096E9E /* QuizAlertView.swift in Sources */,
 				DA7D2A2B24572E7B006646DF /* AppDelegate.swift in Sources */,

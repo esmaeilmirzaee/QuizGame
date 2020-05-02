@@ -177,7 +177,7 @@ class MenuViewController: UIViewController {
         case 1:
             vc = ImageQuizViewController()
         case 2:
-            print("Right Wrong")
+            vc = RightWrongQuizViewController()
         case 3:
             vc = EmojiQuizViewController()
         default:
