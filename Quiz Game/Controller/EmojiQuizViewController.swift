@@ -61,7 +61,6 @@ class EmojiQuizViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-        
     }
     
     func layoutView() {
